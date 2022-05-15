@@ -1,16 +1,17 @@
 <ul *ngFor="let newsData of newsFeedItems">
   <li class="item">
     <img [src]="newsData.image_url" />
-    <a class="title" [href]="newsData.url">
-      <h3>{{ newsData.snippet }}</h3>
-    </a>
-    <ng-container *ngIf="newsData.keywords.length > 0">
-      <ul class="keywords">
+    <div class="body">
+      <a [href]="newsData.url">
+        <h2>{{ newsData.snippet }}</h2>
+      </a>
+      <ul class="keywords" *ngIf="newsData.keywords.length > 0">
         <li *ngFor="let keyword of newsData.keywords">
           <a class="pill" href="#">{{ keyword }}</a>
         </li>
       </ul>
-    </ng-container>
-    <p class="source">{{ newsData.source }}</p>
+      <p class="source">{{ newsData.source }}</p>
+    </div>
   </li>
+  <hr />
 </ul>
