@@ -1,0 +1,74 @@
+@import '../../../styles/theme.scss';
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 25px 5px;
+}
+
+.item {
+  display: grid;
+  grid-template-areas:
+    'image title'
+    'image keywords'
+    'image snippet';
+  column-gap: 10px;
+}
+
+img {
+  grid-area: image;
+  width: 150px;
+  height: 150px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: white;
+}
+
+.title {
+  grid-area: title;
+}
+
+.title h3 {
+  margin: 0;
+}
+
+.title,
+.source {
+  margin: 0 15px;
+}
+
+.keywords li {
+  margin: 15px 5px;
+}
+
+.keywords {
+  grid-area: keywords;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: flex;
+  justify-content: center;
+  min-width: 50px;
+  border: 1px solid $theme-foreground;
+  border-radius: 35px;
+  padding: 10px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.pill:hover {
+  border: 1px solid $theme-green;
+  color: $theme-green;
+  background-color: $theme-selection;
+}
+
+.source {
+  color: lightgrey;
+}

@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import './styles/fonts.scss';
+@import './styles/theme.scss';
+
+* {
+  font-family: Lato;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: $theme-background;
+  color: $theme-foreground;
+}
+
+a {
+  color: $theme-foreground;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+  color: $theme-green;
+}
