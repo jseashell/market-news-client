@@ -2,12 +2,12 @@
   <li class="item">
     <img [src]="newsData.image_url" />
     <div class="body">
-      <a [href]="newsData.url">
+      <a [href]="newsData.url" target="_blank">
         <h2>{{ newsData.snippet }}</h2>
       </a>
       <ul class="keywords" *ngIf="newsData.keywords.length > 0">
         <li *ngFor="let keyword of newsData.keywords">
-          <a class="pill" href="#">{{ keyword }}</a>
+          <button class="pill" href="#">{{ keyword }}</button>
         </li>
       </ul>
       <p class="source">{{ newsData.source }}</p>
