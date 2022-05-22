@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-live-market',
@@ -7,15 +7,27 @@ import { webSocket } from 'rxjs/webSocket';
   styleUrls: ['./live-market.component.scss'],
 })
 export class LiveMarketComponent implements OnInit {
-  ws: string = 'No response';
+  private subject: WebSocketSubject<any>;
+  messages: string[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    const subject = webSocket('wss://1jl4s4n5z4.execute-api.us-east-1.amazonaws.com/dev/connectHandler');
-    subject.subscribe((msg) => {
-      this.ws = JSON.stringify(msg);
-      console.log('message received:\n' + this.ws);
+    this.subject = webSocket({
+      url: 'wss://2jhr8v1488.execute-api.us-east-1.amazonaws.com/dev',
+    });
+
+    this.subject.subscribe((data) => {
+      this.messages.push(data.message);
+    });
+  }
+
+  sendMessage() {
+    this.subject.next({
+      action: 'send',
+      data: {
+        message: `Hello from Angular!`,
+      },
     });
   }
 }

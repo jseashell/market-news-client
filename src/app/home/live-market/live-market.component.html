@@ -1,1 +1,7 @@
-<p>live-market works!</p>
+<p>There are {{ messages?.length || 0 }} messages</p>
+<button (click)="sendMessage()">Send Message</button>
+<ul>
+  <li *ngFor="let message of messages">
+    <p>{{ message }}</p>
+  </li>
+</ul>
