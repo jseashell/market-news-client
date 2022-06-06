@@ -49,6 +49,7 @@
     "jest": "^28.1.0",
     "jest-preset-angular": "^12.1.0",
     "prettier": "^2.6.2",
+    "snyk": "^1.946.0",
     "ts-jest": "^28.0.4",
     "ts-node": "^10.7.0",
     "tslib": "^2.4.0",
