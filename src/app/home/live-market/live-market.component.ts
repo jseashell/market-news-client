@@ -31,9 +31,16 @@ export class LiveMarketComponent implements OnInit {
       }
     });
 
+    subject.next({ type: 'subscribe', symbol: 'META' });
     subject.next({ type: 'subscribe', symbol: 'AAPL' });
+    subject.next({ type: 'subscribe', symbol: 'AMAZON' });
+    subject.next({ type: 'subscribe', symbol: 'NFLX' });
+    subject.next({ type: 'subscribe', symbol: 'GOOG' });
+    subject.next({ type: 'subscribe', symbol: 'MSFT' });
+    subject.next({ type: 'subscribe', symbol: 'TESLA' });
     subject.next({ type: 'subscribe', symbol: 'BINANCE:BTCUSDT' });
-    subject.next({ type: 'subscribe', symbol: 'IC MARKETS:1' });
+    subject.next({ type: 'subscribe', symbol: 'BINANCE:ETHUSDT' });
+    subject.next({ type: 'subscribe', symbol: 'BINANCE:DOGEUSDT' });
   }
 
   private handleNews(data: FinnhubWsDatum[]): void {
