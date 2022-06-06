@@ -17,9 +17,6 @@ export class LiveMarketComponent implements OnInit {
 
     subject.subscribe((event: FinnhubWsEvent) => {
       switch (event?.type) {
-        case 'ping':
-          this.handlePing();
-          break;
         case 'trade':
           this.handleTrade(event.data);
           break;
@@ -29,9 +26,8 @@ export class LiveMarketComponent implements OnInit {
         case 'error':
           this.handleError(event);
           break;
-
         default:
-          throw new Error(`Unhandled Finnhub WS event type "${event.type}"`);
+          console.debug(`Unhandled Finnhub WS event type "${event.type}"`);
       }
     });
 
@@ -40,20 +36,12 @@ export class LiveMarketComponent implements OnInit {
     subject.next({ type: 'subscribe', symbol: 'IC MARKETS:1' });
   }
 
-  private handlePing(): void {
-    console.debug('Finnhub ping');
-  }
-
   private handleNews(data: FinnhubWsDatum[]): void {
-    console.log('news received');
     this.newsData = data;
-    console.dir(this.newsData);
   }
 
   private handleTrade(data: FinnhubWsDatum[]): void {
-    console.log('trade received');
     this.tradeData = data;
-    console.dir(this.tradeData);
   }
 
   private handleError(event: FinnhubWsEvent): void {
