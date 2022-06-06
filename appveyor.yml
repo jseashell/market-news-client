@@ -35,6 +35,7 @@ build_script:
   - sh: |
       npm run lint
       npm run test
+      npm run snyk
       ./codecov
       npm run build
 
