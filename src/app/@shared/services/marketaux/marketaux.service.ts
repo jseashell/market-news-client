@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { MarketauxLatestNews } from './marketaux-latest-news.interface';
 
@@ -13,7 +14,7 @@ export class MarketauxService {
     // https://www.marketaux.com/documentation
     return this.http.get<MarketauxLatestNews>('https://api.marketaux.com/v1/news/all', {
       params: {
-        api_token: 'mNWUFXRriPRsYar8VWTLHnHVxoUP5TCv0EIwHPBM',
+        api_token: environment.marketaux.token,
         exchanges: 'NASDAQ,NYSE,DJI',
       },
     });

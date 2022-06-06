@@ -7,6 +7,9 @@ export const environment = {
   finnhub: {
     token: 'ca0igiiad3i2bhd5pmbg',
   },
+  marketaux: {
+    token: 'mNWUFXRriPRsYar8VWTLHnHVxoUP5TCv0EIwHPBM',
+  },
 };
 
 /*
