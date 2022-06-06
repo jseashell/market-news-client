@@ -1,6 +1,6 @@
 export interface FinnhubWsEvent {
   data: FinnhubWsDatum[];
-  type: 'message' | 'news' | 'ping' | 'error';
+  type: 'trade' | 'news' | 'ping' | 'error';
 }
 
 export interface FinnhubWsDatum {

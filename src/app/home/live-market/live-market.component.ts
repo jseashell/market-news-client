@@ -10,7 +10,7 @@ import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub-ws.interface';
 })
 export class LiveMarketComponent implements OnInit {
   newsData: FinnhubWsDatum[];
-  subscribeData: FinnhubWsDatum[];
+  tradeData: FinnhubWsDatum[];
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
@@ -20,8 +20,8 @@ export class LiveMarketComponent implements OnInit {
         case 'ping':
           this.handlePing();
           break;
-        case 'message':
-          this.handleMessage(event.data);
+        case 'trade':
+          this.handleTrade(event.data);
           break;
         case 'news':
           this.handleNews(event.data);
@@ -45,15 +45,15 @@ export class LiveMarketComponent implements OnInit {
   }
 
   private handleNews(data: FinnhubWsDatum[]): void {
-    console.log('FINNHUB', 'news received');
+    console.log('news received');
     this.newsData = data;
     console.dir(this.newsData);
   }
 
-  private handleMessage(data: FinnhubWsDatum[]): void {
-    console.log('FINNHUB', 'message received');
-    this.subscribeData = data;
-    console.dir(this.subscribeData);
+  private handleTrade(data: FinnhubWsDatum[]): void {
+    console.log('trade received');
+    this.tradeData = data;
+    console.dir(this.tradeData);
   }
 
   private handleError(event: FinnhubWsEvent): void {
