@@ -51,6 +51,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "^2.6.2",
     "protractor": "^7.0.0",
     "snyk": "^1.946.0",
     "ts-node": "^10.7.0",
