@@ -7,7 +7,7 @@ frontend:
     build:
       commands:
         - npm run lint
-        - npm run test:ci
+        - npm run test
         - npm run snyk
         - npm run build
   artifacts:

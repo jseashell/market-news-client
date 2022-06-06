@@ -1,6 +1,6 @@
 export interface FinnhubWsEvent {
   data: FinnhubWsDatum[];
-  type: 'subscribe' | 'news';
+  type: 'message' | 'news' | 'ping';
 }
 
 export interface FinnhubWsDatum {

@@ -14,15 +14,30 @@ export class LiveMarketComponent implements OnInit {
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
+
     subject.subscribe((ws: FinnhubWsEvent) => {
       switch (ws?.type) {
+        case 'ping':
+          this.handlePing();
+          break;
+        case 'message':
+          this.handleMessage(ws.data);
+          break;
         case 'news':
           this.handleNews(ws.data);
           break;
-        case 'subscribe':
-          this.handleSubscribe(ws.data);
+        default:
+          throw new Error(`Unhandled Finnhub WS event type "${ws.type}"`);
       }
     });
+
+    subject.next(JSON.stringify({ type: 'subscribe', symbol: 'AAPL' }));
+    subject.next(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:BTCUSDT' }));
+    subject.next(JSON.stringify({ type: 'subscribe', symbol: 'IC MARKETS:1' }));
+  }
+
+  private handlePing(): void {
+    console.debug('Finnhub ping');
   }
 
   private handleNews(data: FinnhubWsDatum[]): void {
@@ -31,8 +46,8 @@ export class LiveMarketComponent implements OnInit {
     console.dir(this.newsData);
   }
 
-  private handleSubscribe(data: FinnhubWsDatum[]): void {
-    console.log('FINNHUB', 'subscribe received');
+  private handleMessage(data: FinnhubWsDatum[]): void {
+    console.log('FINNHUB', 'message received');
     this.subscribeData = data;
     console.dir(this.subscribeData);
   }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   finnhub: {
-    token: 'ca0igiiad3i2bhd5pmb0',
+    token: 'ca0igiiad3i2bhd5pmbg',
   },
 };
 
