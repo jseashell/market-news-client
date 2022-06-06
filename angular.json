@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "market-news": {
+    "market-news-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/market-news",
+            "outputPath": "dist/market-news-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "market-news:build:production"
+              "browserTarget": "market-news-client:build:production"
             },
             "development": {
-              "browserTarget": "market-news:build:development"
+              "browserTarget": "market-news-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "market-news:build"
+            "browserTarget": "market-news-client:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
       }
     }
   },
-  "defaultProject": "market-news",
+  "defaultProject": "market-news-client",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

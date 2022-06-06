@@ -5,8 +5,8 @@ News aggregate for stock market and financial news and announcements
 ## Install
 
 ```sh
-git clone https://github.com/jseashell/market-news.git
-cd market-news
+git clone https://github.com/jseashell/market-news-client.git
+cd market-news-client
 npm install
 ```
 

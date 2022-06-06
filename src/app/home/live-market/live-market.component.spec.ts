@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LiveMarketComponent } from './live-market.component';
 
 describe('LiveMarketComponent', () => {
@@ -8,9 +7,8 @@ describe('LiveMarketComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LiveMarketComponent ]
-    })
-    .compileComponents();
+      declarations: [LiveMarketComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

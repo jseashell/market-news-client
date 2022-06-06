@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { environment } from '@env/environment';
+import { webSocket } from 'rxjs/webSocket';
+import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub-ws.interface';
 
 @Component({
   selector: 'app-live-market',
@@ -7,27 +9,31 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   styleUrls: ['./live-market.component.scss'],
 })
 export class LiveMarketComponent implements OnInit {
-  private subject: WebSocketSubject<any>;
-  messages: string[] = [];
-
-  constructor() {}
+  newsData: FinnhubWsDatum[];
+  subscribeData: FinnhubWsDatum[];
 
   ngOnInit(): void {
-    this.subject = webSocket({
-      url: 'wss://2jhr8v1488.execute-api.us-east-1.amazonaws.com/dev',
-    });
-
-    this.subject.subscribe((data) => {
-      this.messages.push(data.message);
+    const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
+    subject.subscribe((ws: FinnhubWsEvent) => {
+      switch (ws?.type) {
+        case 'news':
+          this.handleNews(ws.data);
+          break;
+        case 'subscribe':
+          this.handleSubscribe(ws.data);
+      }
     });
   }
 
-  sendMessage() {
-    this.subject.next({
-      action: 'send',
-      data: {
-        message: `Hello from Angular!`,
-      },
-    });
+  private handleNews(data: FinnhubWsDatum[]): void {
+    console.log('FINNHUB', 'news received');
+    this.newsData = data;
+    console.dir(this.newsData);
+  }
+
+  private handleSubscribe(data: FinnhubWsDatum[]): void {
+    console.log('FINNHUB', 'subscribe received');
+    this.subscribeData = data;
+    console.dir(this.subscribeData);
   }
 }
