@@ -1,0 +1,44 @@
+image: Ubuntu
+version: 0.1.0.{build}
+
+branches:
+  only:
+    - /.*/
+
+environment:
+  STAGE: dev
+  SNYK_TOKEN:
+    secure: 9ff1FZB5xsovfQd4y4aiD+LHCY43z+D/p/kmQMQJEn/YAK22m9UsVJeL/o1GKpaP
+
+for:
+  - branches:
+      only:
+        - dev
+    environment:
+      STAGE: dev
+  - branches:
+      only:
+        - main
+    environment:
+      STAGE: prod
+
+install:
+  - sh: |
+      nvm use $(cat .nvmrc)
+      npm install --quiet
+      curl -Os https://uploader.codecov.io/latest/linux/codecov
+      chmod +x codecov
+
+build_script:
+  - sh: |
+      npm run lint
+      npm run test:ci
+      ./codecov
+      npm run build
+
+artifacts:
+  - path: .angular
+    name: market-news-client-${env:STAGE}-${self:version}
+
+deploy_script:
+  - sh: echo 'Deployments are managed with AWS Amplify'

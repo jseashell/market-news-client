@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "version": "0.0.0",
+  "name": "market-news-client",
+  "version": "0.0.1",
   "private": true,
   "author": "John Schellinger",
   "scripts": {
@@ -8,8 +8,9 @@
     "start": "ng serve",
     "build": "ng build",
     "develop": "ng serve --configuration development",
-    "test": "ng test",
-    "test:ci": "ng test --browsers ChromeHeadless --watch=false",
+    "test": "ng test --watch=false --code-coverage",
+    "test:watch": "ng test --watch=true --code-coverage",
+    "test:ci": "ng test --watch=false --code-coverage --browsers ChromeHeadless",
     "format": "prettier --write .",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix"

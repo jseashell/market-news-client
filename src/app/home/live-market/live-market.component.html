@@ -1,7 +1,5 @@
-<p>There are {{ messages?.length || 0 }} messages</p>
-<button (click)="sendMessage()">Send Message</button>
-<ul>
-  <li *ngFor="let message of messages">
-    <p>{{ message }}</p>
+<ul *ngIf="subscribeData">
+  <li *ngFor="let subscribe of subscribeData">
+    <p>{{ subscribe | json }}</p>
   </li>
 </ul>
