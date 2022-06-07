@@ -37,7 +37,12 @@ build_script:
       npm run test:cov
       ./codecov
       npm run snyk
-      npm run build
+  - sh: |
+      if [[ "$STAGE" == "dev" ]]; then
+        npm run build -- --configuration=development
+      elif [[ "STAGE" == "main" ]]; then
+        npm run build
+      fi
 
 artifacts:
   - path: .angular
