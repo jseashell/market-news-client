@@ -9,6 +9,7 @@ export const environment = {
   },
   marketaux: {
     token: 'mNWUFXRriPRsYar8VWTLHnHVxoUP5TCv0EIwHPBM',
+    url: 'https://api.marketaux.com/v1/news/all',
   },
 };
 

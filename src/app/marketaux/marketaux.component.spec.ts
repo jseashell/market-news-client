@@ -1,22 +1,22 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MarketauxService } from '@services';
-import { NewsFeedComponent } from './news-feed.component';
+import { MarketauxComponent } from './marketaux.component';
+import { MarketauxService } from './marketaux.service';
 
-describe('NewsFeedComponent', () => {
-  let component: NewsFeedComponent;
-  let fixture: ComponentFixture<NewsFeedComponent>;
+describe('MarketauxComponent', () => {
+  let component: MarketauxComponent;
+  let fixture: ComponentFixture<MarketauxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NewsFeedComponent],
+      declarations: [MarketauxComponent],
       imports: [HttpClientTestingModule],
       providers: [MarketauxService],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewsFeedComponent);
+    fixture = TestBed.createComponent(MarketauxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

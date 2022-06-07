@@ -1,9 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FinnhubModule } from '../finnhub/finnhub.module';
+import { MarketauxModule } from '../marketaux/marketaux.module';
 import { HomeComponent } from './home.component';
-import { LiveMarketModule } from './live-market/live-market.module';
-import { NewsFeedModule } from './news-feed/news-feed.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,7 +11,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientTestingModule, LiveMarketModule, NewsFeedModule],
+      imports: [HttpClientTestingModule, FinnhubModule, MarketauxModule],
     }).compileComponents();
   });
 

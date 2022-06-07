@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { marketauxLatestNews } from '../../../mock-data/news-feed-items.mock';
-import { Datum, MarketauxLatestNews, MarketauxService } from '@services';
 import { map, of } from 'rxjs';
-import { NewsFeedItem } from './news-feed-item.interface';
+import { marketauxLatestNews } from 'src/mock-data/news-feed-items.mock';
+import { Datum, MarketauxItem, MarketauxLatestNews } from './marketaux.interface';
+import { MarketauxService } from './marketaux.service';
 
 @Component({
-  selector: 'app-news-feed',
-  templateUrl: './news-feed.component.html',
-  styleUrls: ['./news-feed.component.scss'],
+  selector: 'app-marketaux',
+  templateUrl: './marketaux.component.html',
+  styleUrls: ['./marketaux.component.scss'],
 })
-export class NewsFeedComponent implements OnInit {
-  newsFeedItems: NewsFeedItem[];
+export class MarketauxComponent implements OnInit {
+  newsFeedItems: MarketauxItem[];
 
   constructor(private _marketauxService: MarketauxService) {} // ts-ignore
 
@@ -28,7 +28,7 @@ export class NewsFeedComponent implements OnInit {
                 .map((s) => s.trim())
                 .filter(this.removeAllLowercase)
                 .filter(this.denyList),
-            } as NewsFeedItem;
+            } as MarketauxItem;
           });
         })
       )

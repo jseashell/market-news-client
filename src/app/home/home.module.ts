@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
+import { FinnhubModule } from '../finnhub/finnhub.module';
+import { MarketauxModule } from '../marketaux/marketaux.module';
 import { HomeComponent } from './home.component';
-import { LiveMarketModule } from './live-market/live-market.module';
-import { NewsFeedModule } from './news-feed/news-feed.module';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [LiveMarketModule, NewsFeedModule],
+  imports: [FinnhubModule, MarketauxModule],
   exports: [HomeComponent],
 })
 export class HomeModule {}

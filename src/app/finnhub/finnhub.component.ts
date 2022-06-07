@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { webSocket } from 'rxjs/webSocket';
-import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub-ws.interface';
+import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub.interface';
 
 const symbols = [
   'AAPL',
@@ -17,11 +17,11 @@ const symbols = [
 ];
 
 @Component({
-  selector: 'app-live-market',
-  templateUrl: './live-market.component.html',
-  styleUrls: ['./live-market.component.scss'],
+  selector: 'app-finnhub',
+  templateUrl: './finnhub.component.html',
+  styleUrls: ['./finnhub.component.scss'],
 })
-export class LiveMarketComponent implements OnInit {
+export class FinnhubComponent implements OnInit {
   newsData: FinnhubWsDatum[] = [];
   tradeData: FinnhubWsDatum[] = [];
 

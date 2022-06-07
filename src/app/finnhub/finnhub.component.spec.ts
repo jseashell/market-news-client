@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LiveMarketComponent } from './live-market.component';
+import { FinnhubComponent } from './finnhub.component';
 
-describe('LiveMarketComponent', () => {
-  let component: LiveMarketComponent;
-  let fixture: ComponentFixture<LiveMarketComponent>;
+describe('FinnhubComponent', () => {
+  let component: FinnhubComponent;
+  let fixture: ComponentFixture<FinnhubComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LiveMarketComponent],
+      declarations: [FinnhubComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LiveMarketComponent);
+    fixture = TestBed.createComponent(FinnhubComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
