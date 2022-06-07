@@ -8,7 +8,12 @@ frontend:
       commands:
         - npm run lint
         - npm run test
-        - npm run build
+        - >-
+          if [ "${AWS_BRANCH}" = "prod" ]; then
+            npm run build:prod;
+          else
+            npm run build -- --configuration=development;
+          fi
   artifacts:
     baseDirectory: dist/market-news-client
     files:
