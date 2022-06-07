@@ -59,7 +59,7 @@ export class LiveMarketComponent implements OnInit {
 
   private handleTrade(data: FinnhubWsDatum[]): void {
     symbols.forEach((symbol: string) => {
-      if (!this.tradeData.filter((trade) => trade.s === symbol)[0]) {
+      if (!this.tradeData?.filter((trade) => trade.s === symbol)[0]) {
         this.tradeData.push({
           s: symbol,
           p: 0,
