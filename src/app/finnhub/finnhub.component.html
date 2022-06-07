@@ -1,6 +1,17 @@
+<h2>Stocks</h2>
 <ul *ngIf="tradeData">
   <li *ngFor="let trade of tradeData">
     <h3 class="symbol">{{ trade.s }}</h3>
-    <span class="price">{{ trade.p | currency }}</span>
+    <span *ngIf="trade.p; else noPrice" class="price">{{ trade.p | currency }}</span>
   </li>
 </ul>
+<h2>Crypto</h2>
+<ul *ngIf="cryptoData">
+  <li *ngFor="let crypto of cryptoData">
+    <h3 class="symbol">{{ crypto.s }}</h3>
+    <span *ngIf="crypto.p; else noPrice" class="price">{{ crypto.p | currency: '':'':'1.2-8' }}</span>
+  </li>
+</ul>
+<ng-template #noPrice>
+  <span class="price">-</span>
+</ng-template>

@@ -9,6 +9,8 @@ import { FinnhubWsDatum } from './finnhub.interface';
  * @returns the merged array
  */
 export function mergeTradeArrays(stale: FinnhubWsDatum[], toMerge: FinnhubWsDatum[]): FinnhubWsDatum[] {
+  stale = [...stale]; // dereference the given arrays
+  toMerge = [...toMerge];
   return toMerge
     .map(removeDataSourcePrefix)
     .map((trade) => {

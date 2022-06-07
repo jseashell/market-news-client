@@ -4,17 +4,19 @@ import { webSocket } from 'rxjs/webSocket';
 import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub.interface';
 import { mergeTradeArrays } from './merge-trade-arrays';
 
-const symbols = [
-  'AAPL',
-  'AMZN',
-  'GOOG',
-  'META',
-  'MSFT',
-  'NFLX',
-  'TSLA',
+const stocks = ['AAPL', 'AMZN', 'FB', 'GOOG', 'MSFT', 'NFLX', 'TSLA'];
+
+const coins = [
+  'BINANCE:ADAUSDT',
   'BINANCE:BTCUSDT',
-  'BINANCE:ETHUSDT',
+  'BINANCE:BNBUSDT',
   'BINANCE:DOGEUSDT',
+  'BINANCE:ETHUSDT',
+  'BINANCE:LTCUSDT',
+  'BINANCE:SHIBUSDT',
+  'BINANCE:SOLUSDT',
+  'BINANCE:TRXUSDT',
+  'BINANCE:XRPUSDT',
 ];
 
 @Component({
@@ -24,7 +26,14 @@ const symbols = [
 })
 export class FinnhubComponent implements OnInit {
   newsData: FinnhubWsDatum[] = [];
-  tradeData: FinnhubWsDatum[] = [];
+  tradeData: FinnhubWsDatum[] = mergeTradeArrays(
+    [], // no new stock data at initialization
+    stocks.map((symbol) => ({ s: symbol }))
+  );
+  cryptoData: FinnhubWsDatum[] = mergeTradeArrays(
+    [], // no new crypto data at initialization
+    coins.map((coin) => ({ s: coin }))
+  );
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
@@ -35,7 +44,8 @@ export class FinnhubComponent implements OnInit {
     });
 
     // ...before Subject.next(), or else subjects will just be added to a buffer and never published
-    symbols.forEach((symbol) => subject.next({ type: 'subscribe', symbol: symbol }));
+    stocks.forEach((stock) => subject.next({ type: 'subscribe', symbol: stock }));
+    coins.forEach((coin) => subject.next({ type: 'subscribe', symbol: coin }));
   }
 
   private handleEvent(event: FinnhubWsEvent): void {
@@ -59,7 +69,14 @@ export class FinnhubComponent implements OnInit {
   }
 
   private handleTrade(data: FinnhubWsDatum[]): void {
-    this.tradeData = mergeTradeArrays(this.tradeData, data);
+    this.tradeData = mergeTradeArrays(
+      this.tradeData,
+      data.filter((datum) => !datum.s.startsWith('BINANCE'))
+    );
+    this.cryptoData = mergeTradeArrays(
+      this.cryptoData,
+      data.filter((datum) => datum.s.startsWith('BINANCE'))
+    );
   }
 
   private handleError(event: FinnhubWsEvent): void {
