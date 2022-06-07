@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { webSocket } from 'rxjs/webSocket';
 import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub.interface';
+import { mergeTradeArrays } from './merge-trade-arrays';
 
 const symbols = [
   'AAPL',
@@ -58,14 +59,12 @@ export class FinnhubComponent implements OnInit {
   }
 
   private handleTrade(data: FinnhubWsDatum[]): void {
-    this.tradeData = [
-      ...data?.map((datum) => {
-        if (datum.s.startsWith('BINANCE:')) {
-          datum.s = datum.s.split(':')[1];
-        }
-        return datum;
-      }),
-    ].sort((a: FinnhubWsDatum, b: FinnhubWsDatum) => a.s.localeCompare(b.s));
+    this.tradeData = mergeTradeArrays(this.tradeData, data).map((datum) => {
+      if (datum.s.startsWith('BINANCE:')) {
+        datum.s = datum.s.split(':')[1];
+      }
+      return datum;
+    });
   }
 
   private handleError(event: FinnhubWsEvent): void {

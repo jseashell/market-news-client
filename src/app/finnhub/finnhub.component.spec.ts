@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FinnhubComponent } from './finnhub.component';
+import { FinnhubWsDatum } from './finnhub.interface';
 
 describe('FinnhubComponent', () => {
   let component: FinnhubComponent;
