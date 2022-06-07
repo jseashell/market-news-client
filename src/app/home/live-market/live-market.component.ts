@@ -22,8 +22,8 @@ const symbols = [
   styleUrls: ['./live-market.component.scss'],
 })
 export class LiveMarketComponent implements OnInit {
-  newsData: FinnhubWsDatum[];
-  tradeData: FinnhubWsDatum[];
+  newsData: FinnhubWsDatum[] = [];
+  tradeData: FinnhubWsDatum[] = [];
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
@@ -59,7 +59,7 @@ export class LiveMarketComponent implements OnInit {
 
   private handleTrade(data: FinnhubWsDatum[]): void {
     symbols.forEach((symbol: string) => {
-      if (!this.tradeData?.filter((trade) => trade.s === symbol)[0]) {
+      if (!this.tradeData.filter((trade) => trade.s === symbol)[0]) {
         this.tradeData.push({
           s: symbol,
           p: 0,
@@ -70,7 +70,7 @@ export class LiveMarketComponent implements OnInit {
     });
 
     this.tradeData = [
-      ...(this.tradeData || []),
+      ...this.tradeData,
       ...data?.map((datum) => {
         if (datum.s.startsWith('BINANCE:')) {
           datum.s = datum.s.split(':')[1];
