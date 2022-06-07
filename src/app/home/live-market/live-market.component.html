@@ -1,7 +1,7 @@
 <ul *ngIf="tradeData">
   <li *ngFor="let trade of tradeData">
-    <h3 class="symbol">{{ trade.s | symbol }}</h3>
-    <span class="price">{{ trade.p | currency }}</span>
-    <span class="volume">{{ trade.v }}</span>
+    <h3 class="symbol">{{ trade.s }}</h3>
+    <p class="price">{{ trade.p | currency }}</p>
+    <p class="volume">{{ trade.v }}</p>
   </li>
 </ul>

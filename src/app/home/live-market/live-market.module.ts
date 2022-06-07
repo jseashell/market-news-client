@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LiveMarketComponent } from './live-market.component';
-import { SymbolPipe } from './symbol.pipe';
 
 @NgModule({
-  declarations: [LiveMarketComponent, SymbolPipe],
+  declarations: [LiveMarketComponent],
   imports: [CommonModule],
   exports: [LiveMarketComponent],
 })

@@ -3,6 +3,19 @@ import { environment } from '@env/environment';
 import { webSocket } from 'rxjs/webSocket';
 import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub-ws.interface';
 
+const symbols = [
+  'AAPL',
+  'AMZN',
+  'GOOG',
+  'META',
+  'MSFT',
+  'NFLX',
+  'TSLA',
+  'BINANCE:BTCUSDT',
+  'BINANCE:ETHUSDT',
+  'BINANCE:DOGEUSDT',
+];
+
 @Component({
   selector: 'app-live-market',
   templateUrl: './live-market.component.html',
@@ -10,37 +23,36 @@ import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub-ws.interface';
 })
 export class LiveMarketComponent implements OnInit {
   newsData: FinnhubWsDatum[];
-  tradeData: FinnhubWsDatum[];
+  tradeData: {
+    [key: string]: FinnhubWsDatum;
+  }[];
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
 
+    // must Subject.subscribe() ...
     subject.subscribe((event: FinnhubWsEvent) => {
-      switch (event?.type) {
-        case 'trade':
-          this.handleTrade(event.data);
-          break;
-        case 'news':
-          this.handleNews(event.data);
-          break;
-        case 'error':
-          this.handleError(event);
-          break;
-        default:
-          console.debug(`Unhandled Finnhub WS event type "${event.type}"`);
-      }
+      this.handleEvent(event);
     });
 
-    subject.next({ type: 'subscribe', symbol: 'META' });
-    subject.next({ type: 'subscribe', symbol: 'AAPL' });
-    subject.next({ type: 'subscribe', symbol: 'AMAZON' });
-    subject.next({ type: 'subscribe', symbol: 'NFLX' });
-    subject.next({ type: 'subscribe', symbol: 'GOOG' });
-    subject.next({ type: 'subscribe', symbol: 'MSFT' });
-    subject.next({ type: 'subscribe', symbol: 'TESLA' });
-    subject.next({ type: 'subscribe', symbol: 'BINANCE:BTCUSDT' });
-    subject.next({ type: 'subscribe', symbol: 'BINANCE:ETHUSDT' });
-    subject.next({ type: 'subscribe', symbol: 'BINANCE:DOGEUSDT' });
+    // ...before Subject.next(), or else subjects will just be added to a buffer and never published
+    symbols.forEach((symbol) => subject.next({ type: 'subscribe', symbol: symbol }));
+  }
+
+  private handleEvent(event: FinnhubWsEvent): void {
+    switch (event?.type) {
+      case 'trade':
+        this.handleTrade(event.data);
+        break;
+      case 'news':
+        this.handleNews(event.data);
+        break;
+      case 'error':
+        this.handleError(event);
+        break;
+      default:
+        console.debug(`Unhandled Finnhub WS event type "${event.type}"`);
+    }
   }
 
   private handleNews(data: FinnhubWsDatum[]): void {
@@ -48,7 +60,15 @@ export class LiveMarketComponent implements OnInit {
   }
 
   private handleTrade(data: FinnhubWsDatum[]): void {
-    this.tradeData = data;
+    this.tradeData = {
+      ...this.tradeData,
+      ...data.map((datum) => {
+        if (datum.s.startsWith('BINANCE:')) {
+          datum.s = datum.s.split(':')[1];
+        }
+        return { [datum.s]: datum };
+      }),
+    };
   }
 
   private handleError(event: FinnhubWsEvent): void {
