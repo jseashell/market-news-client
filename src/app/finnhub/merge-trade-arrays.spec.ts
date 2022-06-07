@@ -3,11 +3,18 @@ import { mergeTradeArrays } from './merge-trade-arrays';
 
 describe('mergeTradeArrays', () => {
   it('should merge stale data with new data', () => {
-    const staleData: FinnhubWsDatum[] = [{ s: 'symbol-2' }, { s: 'symbol-1' }];
-    const newData: FinnhubWsDatum[] = [{ s: 'symbol-3' }];
+    const staleData: FinnhubWsDatum[] = [{ s: 'symbol-1' }, { s: 'symbol-2' }, { s: 'symbol-3' }, { s: 'symbol-4' }];
+
+    const newData: FinnhubWsDatum[] = [{ s: 'symbol-1' }, { s: 'symbol-1' }, { s: 'symbol-3' }, { s: 'symbol-5' }];
 
     const result = mergeTradeArrays(staleData, newData);
 
-    expect(result).toStrictEqual([{ s: 'symbol-1' }, { s: 'symbol-2' }, { s: 'symbol-3' }]);
+    expect(result).toStrictEqual([
+      { s: 'symbol-1' },
+      { s: 'symbol-2' },
+      { s: 'symbol-3' },
+      { s: 'symbol-4' },
+      { s: 'symbol-5' },
+    ]);
   });
 });
