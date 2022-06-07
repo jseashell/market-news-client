@@ -6,26 +6,22 @@ ul {
 
 li {
   display: grid;
-  grid-template-areas:
-    'symbol price'
-    '. volume';
+  grid-template-areas: 'symbol price';
   grid-template-columns: min-content 1fr;
   row-gap: 5px;
 }
 
 h3 {
-  margin: 0;
-}
-
-.symbol {
   grid-area: symbol;
   font-size: 16px;
   font-weight: 500;
+  margin: 0;
   color: $theme-foreground;
 }
 
-.price {
+span {
   grid-area: price;
+  text-align: right;
   align-self: flex-end;
   font-size: 16px;
   color: $theme-foreground;
@@ -37,11 +33,4 @@ h3 {
 
 .red {
   color: $theme-red;
-}
-
-.volume {
-  grid-area: volume;
-  align-self: flex-end;
-  font-size: 12px;
-  color: $theme-comment;
 }
