@@ -59,12 +59,7 @@ export class FinnhubComponent implements OnInit {
   }
 
   private handleTrade(data: FinnhubWsDatum[]): void {
-    this.tradeData = mergeTradeArrays(this.tradeData, data).map((datum) => {
-      if (datum.s.startsWith('BINANCE:')) {
-        datum.s = datum.s.split(':')[1];
-      }
-      return datum;
-    });
+    this.tradeData = mergeTradeArrays(this.tradeData, data);
   }
 
   private handleError(event: FinnhubWsEvent): void {

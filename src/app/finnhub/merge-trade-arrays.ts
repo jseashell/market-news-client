@@ -6,19 +6,31 @@ import { FinnhubWsDatum } from './finnhub.interface';
  *
  * @param stale
  * @param toMerge
- * @returns
+ * @returns the merged array
  */
 export function mergeTradeArrays(stale: FinnhubWsDatum[], toMerge: FinnhubWsDatum[]): FinnhubWsDatum[] {
-  stale.forEach((staleTrade) => {
-    if (toMerge.filter((trade) => trade.s == staleTrade.s).length == 0) {
-      toMerge.push(staleTrade);
-    }
-  });
-
-  return toMerge.filter(removeDuplicates).sort(bySymbolDesc);
+  return toMerge
+    .map(removeDataSourcePrefix)
+    .map((trade) => {
+      const index = stale.findIndex((staleTrade) => staleTrade.s === trade.s);
+      if (index != undefined && index != null && index >= 0) {
+        stale.splice(index, 1);
+      }
+      return trade;
+    })
+    .concat(stale)
+    .filter(duplicates)
+    .sort(bySymbolDesc);
 }
 
-const removeDuplicates = (trade: FinnhubWsDatum, index: number, self: FinnhubWsDatum[]) =>
+const removeDataSourcePrefix = (datum: FinnhubWsDatum) => {
+  if (datum.s.includes(':')) {
+    datum.s = datum.s.split(':')[1];
+  }
+  return datum;
+};
+
+const duplicates = (trade: FinnhubWsDatum, index: number, self: FinnhubWsDatum[]) =>
   index === self.findIndex((t) => t.s === trade.s);
 
 const bySymbolDesc = (a: FinnhubWsDatum, b: FinnhubWsDatum) => a.s.localeCompare(b.s);
