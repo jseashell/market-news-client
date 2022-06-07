@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   finnhub: {
-    token: 'ca0igiiad3i2bhd5pmbg',
+    token: 'cafa81qad3ibf4h8v020',
   },
   marketaux: {
     token: 'mNWUFXRriPRsYar8VWTLHnHVxoUP5TCv0EIwHPBM',
