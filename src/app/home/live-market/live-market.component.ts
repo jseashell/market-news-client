@@ -61,8 +61,8 @@ export class LiveMarketComponent implements OnInit {
 
   private handleTrade(data: FinnhubWsDatum[]): void {
     this.tradeData = {
-      ...this.tradeData,
-      ...data.map((datum) => {
+      ...(this.tradeData || {}),
+      ...data?.map((datum) => {
         if (datum.s.startsWith('BINANCE:')) {
           datum.s = datum.s.split(':')[1];
         }
