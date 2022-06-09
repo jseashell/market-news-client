@@ -1,7 +1,7 @@
-import { FinnhubWsDatum } from './finnhub.interface';
+import { FinnhubWsDatum } from './watchlist.interface';
 
 /**
- * New data from the Finnhub WS shows trades/second. There can be multiple trades for a symbol,
+ * New data from the Watchlist WS shows trades/second. There can be multiple trades for a symbol,
  * resulting in duplicates that must be filtered
  *
  * @param stale

@@ -28,19 +28,23 @@ install:
   - sh: |
       nvm use $(cat .nvmrc)
       npm install --quiet
-      curl -Os https://uploader.codecov.io/latest/linux/codecov
-      chmod +x codecov
-
+      if [[ "$STAGE" == "dev" || "$STAGE" == "prod" ]]; then
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+      fi
 build_script:
   - sh: |
       npm run lint
       npm run test
-      ./codecov
-      npm run snyk
+  - sh: |
+      if [[ "$STAGE" == "dev" || "$STAGE" == "prod" ]]; then
+        ./codecov
+        npx snyk monitor
+      fi
   - sh: |
       if [[ "$STAGE" == "dev" ]]; then
         npm run build -- --configuration=development
-      elif [[ "STAGE" == "main" ]]; then
+      elif [[ "STAGE" == "prod" ]]; then
         npm run build
       fi
 

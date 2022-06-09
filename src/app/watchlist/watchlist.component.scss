@@ -1,18 +1,43 @@
 @import '../../styles/theme.scss';
 
+.title {
+  display: flex;
+  align-items: flex-end;
+}
+.title h2 {
+  margin: 0;
+}
+
+.title button {
+  background: transparent;
+  color: $theme-cyan;
+  border: none;
+  text-decoration: underline;
+  height: min-content;
+  width: min-content;
+}
+
+.title button:hover {
+  cursor: pointer;
+}
+
 ul {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 li {
   display: grid;
   grid-template-areas: 'symbol price';
   grid-template-columns: min-content 1fr;
-  row-gap: 5px;
 }
 
-h3 {
+div,
+h4,
+label {
   grid-area: symbol;
+  display: flex;
   font-size: 16px;
   font-weight: 500;
   margin: 0;

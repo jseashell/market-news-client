@@ -1,11 +1,13 @@
 :host {
   display: flex;
+  justify-content: space-between;
+  column-gap: 30px;
 }
 
 app-marketaux {
   width: 70%;
 }
 
-app-finnhub {
+app-watchlist {
   width: 30%;
 }

@@ -10,7 +10,6 @@
     "develop": "ng serve --configuration development",
     "test": "ng test --coverage",
     "test:watch": "ng test --onlyChanged",
-    "snyk": "npx snyk monitor",
     "format": "prettier --write .",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix"

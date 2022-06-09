@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FinnhubComponent } from './finnhub.component';
+import { WatchlistComponent } from './watchlist.component';
 
-describe('FinnhubComponent', () => {
-  let component: FinnhubComponent;
-  let fixture: ComponentFixture<FinnhubComponent>;
+describe('WatchlistComponent', () => {
+  let component: WatchlistComponent;
+  let fixture: ComponentFixture<WatchlistComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FinnhubComponent],
+      declarations: [WatchlistComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FinnhubComponent);
+    fixture = TestBed.createComponent(WatchlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
-import { FinnhubWsDatum } from './finnhub.interface';
 import { mergeTradeArrays } from './merge-trade-arrays';
+import { FinnhubWsDatum } from './watchlist.interface';
 
 describe('mergeTradeArrays', () => {
   it('should merge stale data with new data', () => {

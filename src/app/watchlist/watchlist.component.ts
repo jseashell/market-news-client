@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { webSocket } from 'rxjs/webSocket';
-import { FinnhubWsDatum, FinnhubWsEvent } from './finnhub.interface';
+import { FinnhubService } from '../@shared/services/finnhub/finnhub.service';
 import { mergeTradeArrays } from './merge-trade-arrays';
+import { FinnhubWsDatum, FinnhubWsEvent } from './watchlist.interface';
 
-const stocks = ['AAPL', 'AMZN', 'FB', 'GOOG', 'MSFT', 'NFLX', 'TSLA'];
+const stocks = ['AAPL', 'AMZN', 'GOOG', 'MSFT', 'NFLX', 'TSLA'];
 
 const coins = [
   'BINANCE:ADAUSDT',
@@ -20,11 +21,11 @@ const coins = [
 ];
 
 @Component({
-  selector: 'app-finnhub',
-  templateUrl: './finnhub.component.html',
-  styleUrls: ['./finnhub.component.scss'],
+  selector: 'app-watchlist',
+  templateUrl: './watchlist.component.html',
+  styleUrls: ['./watchlist.component.scss'],
 })
-export class FinnhubComponent implements OnInit {
+export class WatchlistComponent implements OnInit {
   newsData: FinnhubWsDatum[] = [];
   tradeData: FinnhubWsDatum[] = mergeTradeArrays(
     [], // no new stock data at initialization
@@ -34,6 +35,10 @@ export class FinnhubComponent implements OnInit {
     [], // no new crypto data at initialization
     coins.map((coin) => ({ s: coin }))
   );
+  editMode = false;
+  editLabel = 'Edit';
+
+  constructor(private finnhubService: FinnhubService) {}
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
@@ -60,7 +65,7 @@ export class FinnhubComponent implements OnInit {
         this.handleError(event);
         break;
       default:
-        console.debug(`Unhandled Finnhub WS event type "${event.type}"`);
+        console.debug(`Unhandled Watchlist WS event type "${event.type}"`);
     }
   }
 
@@ -81,5 +86,15 @@ export class FinnhubComponent implements OnInit {
 
   private handleError(event: FinnhubWsEvent): void {
     console.error(event);
+  }
+
+  edit() {
+    this.editMode = !this.editMode;
+
+    if (this.editMode) {
+      this.editLabel = 'Save';
+    } else {
+      this.editLabel = 'Edit';
+    }
   }
 }
