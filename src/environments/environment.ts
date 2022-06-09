@@ -11,6 +11,9 @@ export const environment = {
     token: 'mNWUFXRriPRsYar8VWTLHnHVxoUP5TCv0EIwHPBM',
     url: 'https://api.marketaux.com/v1/news/all',
   },
+  resourceApi: {
+      url: 'https://6ebf4je7og.execute-api.us-east-1.amazonaws.com/dev'
+  }
 };
 
 /*
