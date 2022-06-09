@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { webSocket } from 'rxjs/webSocket';
-import { FinnhubService } from '../@shared/services/finnhub/finnhub.service';
 import { mergeTradeArrays } from './merge-trade-arrays';
 import { FinnhubWsDatum, FinnhubWsEvent } from './watchlist.interface';
 
@@ -38,7 +37,7 @@ export class WatchlistComponent implements OnInit {
   editMode = false;
   editLabel = 'Edit';
 
-  constructor(private finnhubService: FinnhubService) {}
+  constructor() {}
 
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);

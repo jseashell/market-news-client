@@ -10,7 +10,7 @@ frontend:
         - npm run test
         - >-
           if [ "${AWS_BRANCH}" = "prod" ]; then
-            npm run build:prod;
+            npm run build -- --configuration=production;
           else
             npm run build -- --configuration=development;
           fi
