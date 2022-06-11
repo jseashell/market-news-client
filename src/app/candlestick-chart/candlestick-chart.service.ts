@@ -12,10 +12,21 @@ export interface CandlesQueryParams {
   to: string;
 }
 
+interface CandlesResponse {
+  data: {
+    o: number[];
+    h: number[];
+    l: number[];
+    c: number[];
+    v: number[];
+  };
+}
 @Injectable({
   providedIn: 'root',
 })
 export class CandlestickChartService {
+  private forceTwoDecimalPlaces = (value: number) => parseFloat(value.toFixed(2));
+
   constructor(private http: HttpClient) {}
 
   candles(params: CandlesQueryParams): Observable<Candles> {
@@ -24,13 +35,15 @@ export class CandlestickChartService {
         params: { ...params },
       })
       .pipe(
-        map((res: any) => ({
-          open: res.data.o,
-          high: res.data.h,
-          low: res.data.l,
-          close: res.data.c,
-          volume: res.data.v,
-        }))
+        map(
+          (res: CandlesResponse): Candles => ({
+            open: res.data.o.map(this.forceTwoDecimalPlaces),
+            high: res.data.h.map(this.forceTwoDecimalPlaces),
+            low: res.data.l.map(this.forceTwoDecimalPlaces),
+            close: res.data.c.map(this.forceTwoDecimalPlaces),
+            volume: res.data.v.map(this.forceTwoDecimalPlaces),
+          })
+        )
       );
   }
 }

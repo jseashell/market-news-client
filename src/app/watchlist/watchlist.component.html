@@ -1,13 +1,15 @@
 <div class="title">
   <h2>Watchlist</h2>
-  <button (click)="edit()">{{ editLabel }}</button>
+  <button *ngIf="!editMode" (click)="toggleEdit()">Edit</button>
+  <button *ngIf="editMode" (click)="updateWatchlist()">Update</button>
+  <button *ngIf="editMode" (click)="toggleEdit()">Cancel</button>
 </div>
 <h3>Stocks</h3>
 <ul *ngIf="tradeData">
   <li *ngFor="let trade of tradeData">
     <ng-container *ngIf="editMode; else viewModeStocks">
       <div class="symbol">
-        <input [id]="'toggle' + trade.s" type="checkbox" checked />
+        <input #stockWatchlistCheckboxes [id]="'toggle' + trade.s" type="checkbox" checked />
         <label [for]="'toggle' + trade.s">{{ trade.s }}</label>
       </div>
       <span *ngIf="trade.p; else noPrice" class="price">{{ trade.p | currency: '':'$':'1.2-2' }}</span>
@@ -23,7 +25,7 @@
   <li *ngFor="let crypto of cryptoData">
     <ng-container *ngIf="editMode; else viewModeCrypto">
       <div class="symbol">
-        <input [id]="'toggle' + crypto.s" type="checkbox" checked />
+        <input #coinWatchlistCheckboxes [id]="'toggle' + crypto.s" type="checkbox" checked />
         <label [for]="'toggle' + crypto.s">{{ crypto.s }}</label>
       </div>
     </ng-container>

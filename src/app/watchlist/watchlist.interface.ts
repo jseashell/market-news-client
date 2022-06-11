@@ -1,3 +1,18 @@
+export interface WatchlistResponse {
+  message: string;
+  data: Watchlist;
+}
+
+export interface Watchlist {
+  userId: string;
+  stocks: {
+    symbol: string;
+  }[];
+  coins: {
+    symbol: string;
+  }[];
+}
+
 // https://finnhub.io/docs/api/websocket-trades
 export interface FinnhubWsEvent {
   data?: FinnhubWsDatum[];
