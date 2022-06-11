@@ -1,3 +1,10 @@
+@import '../../styles/theme.scss';
+
 #chart {
   max-width: 650px;
+}
+
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+  background-color: $theme-background !important;
 }

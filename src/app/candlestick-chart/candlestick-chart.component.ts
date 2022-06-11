@@ -6,8 +6,6 @@ import { Candles } from './candles.interface';
 import { CandlestickChartService } from './candlestick-chart.service';
 import { Series } from './series.type';
 
-export type ChartOptions = Pick<ApexOptions, 'series' | 'chart' | 'xaxis' | 'yaxis' | 'title'>;
-
 @Component({
   selector: 'app-candlestick-chart',
   templateUrl: './candlestick-chart.component.html',
@@ -15,10 +13,10 @@ export type ChartOptions = Pick<ApexOptions, 'series' | 'chart' | 'xaxis' | 'yax
 })
 export class CandlestickChartComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
+  public chartOptions: Partial<ApexOptions>;
   symbol = 'AAPL';
   resolution = 15; // seconds // TODO Add support for D, W, M
-  from = 1654867800;
+  from = 1654866000;
   to = 1654891200;
 
   constructor(private service: CandlestickChartService) {}
@@ -36,10 +34,9 @@ export class CandlestickChartComponent implements OnInit {
       .pipe(
         map((candles: Candles) => {
           return candles.open.map((open, index) => {
-            const date = new Date(new Date(this.from * 1000).getTime() + index * this.resolution * 60000);
-            console.log(date);
+            const millis = this.from * 1000 + index * this.resolution * 60000;
             return {
-              x: date,
+              x: new Date(millis),
               y: [open, candles.high[index], candles.low[index], candles.close[index]],
             };
           });
@@ -50,12 +47,14 @@ export class CandlestickChartComponent implements OnInit {
           this.chartOptions = {
             series: [
               {
-                name: 'candle',
                 data: series,
               },
             ],
             chart: {
               type: 'candlestick',
+            },
+            theme: {
+              mode: 'dark',
             },
             title: {
               text: this.symbol,
@@ -64,9 +63,9 @@ export class CandlestickChartComponent implements OnInit {
             xaxis: {
               type: 'datetime',
               labels: {
+                datetimeUTC: false, // show the chart in the local time
                 datetimeFormatter: {
-                  // TODO
-                  // hour: 'hh',
+                  hour: 'h:mm',
                 },
               },
             },
@@ -74,6 +73,12 @@ export class CandlestickChartComponent implements OnInit {
               tooltip: {
                 enabled: true,
               },
+              labels: {
+                formatter: (val) => '$' + val,
+              },
+            },
+            tooltip: {
+              theme: 'dark',
             },
           };
         }
@@ -81,6 +86,7 @@ export class CandlestickChartComponent implements OnInit {
   }
 
   public generateDayWiseTimeSeries(baseval, count, yrange) {
+    console.log('in daywise time series');
     var i = 0;
     var series = [];
     while (i < count) {
