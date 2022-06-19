@@ -84,18 +84,4 @@ export class CandlestickChartComponent implements OnInit {
         }
       });
   }
-
-  public generateDayWiseTimeSeries(baseval, count, yrange) {
-    console.log('in daywise time series');
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-      series.push([baseval, y]);
-      baseval += 86400000;
-      i++;
-    }
-    return series;
-  }
 }
