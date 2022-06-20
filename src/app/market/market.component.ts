@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { map, of } from 'rxjs';
 import { marketauxLatestNews } from 'src/mock-data/news-feed-items.mock';
-import { Datum, MarketauxItem, MarketauxLatestNews } from './marketaux.interface';
+import { MarketauxDatum, MarketauxItem, MarketauxLatestNews } from './marketaux.interface';
 import { MarketauxService } from './marketaux.service';
 
 @Component({
-  selector: 'app-marketaux',
-  templateUrl: './marketaux.component.html',
-  styleUrls: ['./marketaux.component.scss'],
+  selector: 'app-market',
+  templateUrl: './market.component.html',
+  styleUrls: ['./market.component.scss'],
 })
-export class MarketauxComponent implements OnInit {
+export class MarketComponent implements OnInit {
   newsFeedItems: MarketauxItem[];
 
   constructor(private _marketauxService: MarketauxService) {} // ts-ignore
@@ -19,8 +19,8 @@ export class MarketauxComponent implements OnInit {
     of(marketauxLatestNews)
       .pipe(
         map((marketauxLatestNews: MarketauxLatestNews) => marketauxLatestNews.data),
-        map((data: Datum[]) => {
-          return data.map((datum: Datum) => {
+        map((data: MarketauxDatum[]) => {
+          return data.map((datum: MarketauxDatum) => {
             return {
               ...datum,
               keywords: datum.keywords

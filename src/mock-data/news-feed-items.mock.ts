@@ -1,4 +1,4 @@
-import { MarketauxLatestNews } from 'src/app/marketaux/marketaux.interface';
+import { MarketauxLatestNews } from 'src/app/market/marketaux.interface';
 
 export const marketauxLatestNews: MarketauxLatestNews = {
   meta: {

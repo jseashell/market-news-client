@@ -1,9 +1,9 @@
 export interface MarketauxLatestNews {
   meta?: Meta;
-  data: Datum[];
+  data: MarketauxDatum[];
 }
 
-export interface Datum {
+export interface MarketauxDatum {
   uuid: string;
   title: string;
   description: string;
@@ -15,11 +15,11 @@ export interface Datum {
   published_at: Date;
   source: string;
   relevance_score?: null;
-  entities?: Entity[];
-  similar?: Datum[];
+  entities?: MarketauxEntity[];
+  similar?: MarketauxDatum[];
 }
 
-export interface Entity {
+export interface MarketauxEntity {
   symbol: string;
   name: string;
   exchange: string;
@@ -56,6 +56,6 @@ export interface MarketauxItem {
   published_at: Date;
   source: string;
   relevance_score?: null;
-  entities: Entity[];
-  similar: Datum[];
+  entities: MarketauxEntity[];
+  similar: MarketauxDatum[];
 }

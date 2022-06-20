@@ -14,7 +14,9 @@
     "module": "es2020",
     "lib": ["es2020", "dom"],
     "paths": {
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@components": ["src/app/@shared/components"],
+      "@services": ["src/app/@shared/services"]
     }
   },
   "angularCompilerOptions": {

@@ -1,24 +1,25 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AboutComponent } from './about/about.component';
-import { AppHeaderModule } from './app-header/app-header.module';
+import { AboutModule } from './about/about.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CandlestickChartModule } from './candlestick-chart/candlestick-chart.module';
+import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
-import { WatchlistModule } from './watchlist/watchlist.module';
+import { MarketModule } from './market/market.module';
+import { PaperTradingModule } from './paper-trading/paper-trading.module';
 
 @NgModule({
-  declarations: [AppComponent, AboutComponent],
+  declarations: [AppComponent],
   imports: [
+    AboutModule,
     AppRoutingModule,
-    AppHeaderModule,
+    HeaderModule,
     BrowserModule,
-    CandlestickChartModule,
     HomeModule,
     HttpClientModule,
-    WatchlistModule,
+    MarketModule,
+    PaperTradingModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+}
+
+app-watchlist {
+  width: 30%;
+}
+
+app-candlestick-chart {
+  flex-grow: 1;
+}

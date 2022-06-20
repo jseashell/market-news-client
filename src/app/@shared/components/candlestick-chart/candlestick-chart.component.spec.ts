@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CandlestickChartComponent } from './candlestick-chart.component';
@@ -8,9 +9,9 @@ describe('CandlestickChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CandlestickChartComponent ]
-    })
-    .compileComponents();
+      declarations: [CandlestickChartComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

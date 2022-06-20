@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MarketauxComponent } from './marketaux.component';
+import { MarketComponent } from './market.component';
 import { MarketauxService } from './marketaux.service';
 
 @NgModule({
-  declarations: [MarketauxComponent],
+  declarations: [MarketComponent],
   imports: [CommonModule],
   providers: [MarketauxService],
-  exports: [MarketauxComponent],
+  exports: [MarketComponent],
 })
-export class MarketauxModule {}
+export class MarketModule {}

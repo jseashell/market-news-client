@@ -37,8 +37,6 @@ export class WatchlistComponent implements OnInit {
   editMode = false;
   editLabel = 'Edit';
 
-  constructor() {}
-
   ngOnInit(): void {
     const subject = webSocket(`wss://ws.finnhub.io?token=${environment.finnhub.token}`);
 

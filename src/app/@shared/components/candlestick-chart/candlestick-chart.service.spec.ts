@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CandlestickChartService } from './candlestick-chart.service';
@@ -9,7 +10,9 @@ describe('CandlestickChartService', () => {
   let service: CandlestickChartService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(CandlestickChartService);
   });
 
