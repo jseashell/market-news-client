@@ -10,7 +10,18 @@ h1 {
   margin-right: 30px;
 }
 
+nav {
+  font-size: 1.25em;
+}
+
 nav > a {
   margin-right: 10px;
-  font-size: 1.25em;
+}
+
+nav > button {
+  flex-grow: 1;
+  justify-self: flex-end;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
 }
